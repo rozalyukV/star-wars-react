@@ -1,9 +1,20 @@
-import PeoplePage from '@containers/PeoplePage'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import routesConfig from '@routes/routesConfig'
+import Header from '@components/Header'
 
 import styles from './App.module.css'
 
 const App = () => {
-  return <PeoplePage />
+  return (
+    <Router>
+      <Header />
+      <Routes>
+        {routesConfig.map((route, index) => (
+          <Route key={index} path={route.path} element={route.element} />
+        ))}
+      </Routes>
+    </Router>
+  )
 }
 
 export default App
