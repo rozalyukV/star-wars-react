@@ -16,7 +16,10 @@
 
   --font-family-main: sans-serif;
 
+  --font-size-main: 16px;
   --font-size-header: 26px;
+
+  --width-max: 1200px;
 
   --border-radius-small: 3px;
 
@@ -25,6 +28,7 @@
     0 0 40px var(--color-blue);
 
   --theme-default-header: #cccc46;
+  --theme-default-bgimage: url(@static/bg.jpg);
 }
 
 body {
@@ -32,6 +36,16 @@ body {
   padding: 0;
   background-color: var(--color-dark-gray);
   font-family: var(--font-family-main);
+  font-size: var(--font-size-main);
+  background-image: var(--theme-default-bgimage);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-attachment: fixed;
+}
+
+img {
+  display: block;
 }
 
 .header__text {
