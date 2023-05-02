@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 
 import { withErrorApi } from '@hoc-helpers/withErrorApi'
 import PeopleList from '@components/PeoplePage/PeopleList'
+import PeopleNavigation from '@components/PeoplePage/PeopleNavigation'
 import { getApiResource, changeHTTP } from '@utils/network'
 import {
   getPeopleId,
@@ -49,11 +50,16 @@ const PeoplePage = ({ setErrorApi }) => {
 
   useEffect(() => {
     getResource(API_PEOPLE + queryPage)
-  }, [queryPage])
+  }, [])
 
   return (
     <>
-      <h1 className="header__text">People</h1>
+      <PeopleNavigation
+        getResource={getResource}
+        prevPage={prevPage}
+        nextPage={nextPage}
+        counterPage={counterPage}
+      />
       {people && <PeopleList people={people} />}
     </>
   )
