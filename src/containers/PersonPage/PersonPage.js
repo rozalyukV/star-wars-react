@@ -8,6 +8,8 @@ import PersonInfo from '@components/PersonPage/PersonInfo'
 import PersonPhoto from '@components/PersonPage/PersonPhoto'
 import PersonLinkBack from '@components/PersonPage/PersonLinkBack'
 
+import UiLoading from '@ui/UiLoading'
+
 import { getApiResource } from '@utils/network'
 import { getPeopleImage } from '@services/getPeopleData'
 import { API_PERSON } from '@constants/api'
@@ -57,13 +59,14 @@ const PersonPage = ({ setErrorApi }) => {
   return (
     <>
       <PersonLinkBack />
+
       <div className={styles.wrapper}>
         <span className={styles.person__name}>{personName}</span>
         <div className={styles.container}>
           <PersonPhoto personPhoto={personPhoto} personName={personName} />
           {personInfo && <PersonInfo personInfo={personInfo} />}
           {personFilms && (
-            <Suspense fallback={<h1>Loading...</h1>}>
+            <Suspense fallback={<UiLoading />}>
               <PersonFilms personFilms={personFilms} />
             </Suspense>
           )}
