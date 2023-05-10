@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect, Suspense } from 'react'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import { withErrorApi } from '@hoc-helpers/withErrorApi'
@@ -26,6 +27,9 @@ const PersonPage = ({ setErrorApi }) => {
   const [personName, setPersonName] = useState(null)
   const [personPhoto, setPersonPhoto] = useState(null)
   const [personFilms, setPersonFilms] = useState(null)
+  const [personFavorite, setPersonFavorite] = useState(false)
+
+  const storeDate = useSelector((state) => state.favoriteReducer)
 
   const { id } = useParams()
 
@@ -33,6 +37,8 @@ const PersonPage = ({ setErrorApi }) => {
     ;(async () => {
       setPersonId(id)
       const res = await getApiResource(`${API_PERSON}/${id}/`)
+
+      storeDate[id] ? setPersonFavorite(true) : setPersonFavorite(false)
 
       if (res) {
         setPersonInfo([
@@ -69,6 +75,8 @@ const PersonPage = ({ setErrorApi }) => {
             personId={personId}
             personPhoto={personPhoto}
             personName={personName}
+            personFavorite={personFavorite}
+            setPersonFavorite={setPersonFavorite}
           />
           {personInfo && <PersonInfo personInfo={personInfo} />}
           {personFilms && (
