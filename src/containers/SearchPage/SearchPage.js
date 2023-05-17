@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
+import { debounce } from 'lodash'
 
 import { withErrorApi } from '@hoc-helpers/withErrorApi'
 import { API_SEARCH } from '@constants/api'
 import { getApiResource } from '@utils/network'
 import { getPeopleId, getPeopleImage } from '@services/getPeopleData'
+
+import SearchPageInfo from '@components/SearchPage/SearchPageInfo'
 
 import styles from './SearchPage.module.css'
 
@@ -33,11 +36,20 @@ const SearchPage = ({ setErrorApi }) => {
     }
   }
 
+  useEffect(() => {
+    getResponse('')
+  }, [])
+
+  const debouncedGetResponse = useCallback(
+    debounce((value) => getResponse(value), 300),
+    []
+  )
+
   const handleInputChange = (event) => {
     const value = event.target.value
 
     setInputSearchValue(value)
-    getResponse(value)
+    debouncedGetResponse(value)
   }
 
   return (
@@ -49,6 +61,7 @@ const SearchPage = ({ setErrorApi }) => {
         onChange={handleInputChange}
         placeholder="Input characters's name"
       />
+      <SearchPageInfo people={people} />
     </>
   )
 }
