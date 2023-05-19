@@ -1,4 +1,5 @@
 {
+  "homepage": "https://rozalyukV.github.io/star-wars-react",
   "name": "star-wars-react",
   "version": "0.1.0",
   "private": true,
@@ -18,6 +19,8 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-app-rewired build",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
@@ -61,6 +64,7 @@
     "@storybook/react-webpack5": "^7.0.7",
     "@storybook/testing-library": "^0.0.14-next.2",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "gh-pages": "^5.0.0",
     "react-app-rewire-alias": "^1.1.7",
     "react-app-rewired": "^2.2.1",
     "storybook": "^7.0.7",
